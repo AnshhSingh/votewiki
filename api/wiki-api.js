@@ -31,7 +31,8 @@ async function getWikipediaArticleContent(title) {
 }
 
 // Example: Fetch the content of the Wikipedia article for "JavaScript"
-const articleTitle = "JavaScript";
+const articleTitle = "JavaScript"; //CHANGE TO REQ QUEARY
+
 getWikipediaArticleContent(articleTitle)
   .then((content) => {
     if (content) {
@@ -56,26 +57,50 @@ getWikipediaArticleContent(articleTitle)
 
 
 
-  
+
 
   //funtion to get previous content
 
-  async function getWikipediaArticleRevision(title, revisionId) {
+  
+
+  
+
+  // Wikipedia API URL
+  const apiUrl_revision = "https://en.wikipedia.org/w/api.php";
+
+  // Function to fetch and extract the content of the previous revision of a Wikipedia article
+  async function getPreviousWikipediaArticleRevision(title) {
     try {
-      // Make a request to the Wikipedia API
-      const response = await axios.get(apiUrl, {
+      // Make a request to the Wikipedia API to get the current revision
+      const currentRevisionResponse = await axios.get(apiUrl_revision, {
+        params: {
+          action: "query",
+          format: "json",
+          titles: title,
+          prop: "revisions",
+          rvprop: "ids",
+          rvlimit: 1,
+        },
+      });
+
+      const currentRevisionId = Object.values(
+        currentRevisionResponse.data.query.pages
+      )[0].revisions[0].revid;
+
+      // Make a request to the Wikipedia API to get the previous revision
+      const previousRevisionResponse = await axios.get(apiUrl_revision, {
         params: {
           action: "query",
           format: "json",
           titles: title,
           prop: "revisions",
           rvprop: "content",
-          revids: revisionId,
+          rvdiffto: currentRevisionId,
         },
       });
 
-      // Extract the article content from the revision
-      const page = Object.values(response.data.query.pages)[0];
+      // Extract the article content from the previous revision
+      const page = Object.values(previousRevisionResponse.data.query.pages)[0];
       const articleContent = page.revisions[0]["*"];
 
       return articleContent;
@@ -88,14 +113,15 @@ getWikipediaArticleContent(articleTitle)
     }
   }
 
-  // Example: Fetch a specific revision of the Wikipedia article for "JavaScript"
-  const articleTitle_previous = "JavaScript";
+  // Example: Fetch the content of the previous revision of the Wikipedia article for "JavaScript"
+  const articleTitle_revision = "JavaScript";//CHANGE THIS TO WHAT QUEARY U WANT
 
 
-  const revisionId = 1054421122; // **** Replace with the desired revision ID****
 
 
-  getWikipediaArticleRevision(articleTitle_previous, revisionId)
+
+
+  getPreviousWikipediaArticleRevision(articleTitle_revision)
     .then((content) => {
       if (content) {
         // Create a DOM using jsdom to manipulate the content further if needed
