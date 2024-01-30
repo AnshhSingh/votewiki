@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Make sure the body covers the entire viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+.login-container {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #f0f0f0; /* Light Gray background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333; /* Dark Gray text color */
+}
+
+input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid #ccc; /* Medium Gray border */
+    border-radius: 4px;
+}
+
+.error-message {
+    color: #ff0000; /* Red error text color */
+}
+
+button {
+    background-color: #3498db; /* Blue button background color */
+    color: #fff; /* White button text color */
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #217dbb; /* Darker Blue on hover */
+}
+
+.login-link {
+    margin-top: 10px;
+    color: #666; /* Gray text color for the login link */
+}
+
+.login-link a {
+    color: #3498db; /* Blue color for the login link */
+}
