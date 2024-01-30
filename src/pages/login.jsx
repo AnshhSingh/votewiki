@@ -1,6 +1,47 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
+import Web3 from 'web3';
 
-export default function Login() {
+function Login() {
+
+  const [isConnected, setIsConnected] = useState(false);
+  const [ethBalance, setEthBalance] = useState("");
+  
+  const detectCurrentProvider = () => {
+    let provider;
+    if (window.ethereum) {
+      provider = window.ethereum;
+    } else if (window.web3) {
+      provider = window.web3.currentProvider;
+    } else {
+      console.log("Non-ethereum browser detected. You should install Metamask");
+    }
+    return provider;
+  };
+  
+  const onConnect = async() => {
+    try {
+      const currentProvider = detectCurrentProvider();
+      if(currentProvider) {
+        await currentProvider.request({method: 'eth_requestAccounts'});
+        const web3 = new Web3(currentProvider);
+        const userAccount  =await web3.eth.getAccounts();
+        const account = userAccount[0];
+        let ethBalance = await web3.eth.getBalance(account);
+        setEthBalance(ethBalance);
+        setIsConnected(true);
+        alert("Your metamask account is already linked");
+        console.log(account);
+      }
+    } catch(err) {
+      console.log(err);
+    }
+  }
+  
+  const onDisconnect = () => {
+    setIsConnected(false);
+  }
+  
+
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring ring-2 ring-purple-600 lg:max-w-xl">
@@ -10,7 +51,7 @@ export default function Login() {
                 <form className="mt-6">
                     <div className="mb-2">
                         <label
-                            for="email"
+                            htmlFor="email"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Email
@@ -22,7 +63,7 @@ export default function Login() {
                     </div>
                     <div className="mb-2">
                         <label
-                            for="password"
+                            htmlfor="password"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Password
@@ -39,10 +80,24 @@ export default function Login() {
                         Forget Password?
                     </a>
                     <div className="mt-6">
-                        <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                        <button className="app-button__login w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600" onClick={onConnect}>
+                        
                             Login
                         </button>
                     </div>
+                    {isConnected && (
+        <div className="app-wrapper">
+          <div className="app-details">
+            <h2> You are connected to metamask.</h2>
+       
+          </div>
+          {/* <div>
+            <button className="app-buttons__logout" onClick={onDisconnect}>
+            Disconnect
+            </button>
+          </div> */}
+        </div>
+      )}
                 </form>
 
                 <p className="mt-8 text-xs font-light text-center text-gray-700">
@@ -59,3 +114,6 @@ export default function Login() {
         </div>
     );
 }
+
+
+export default Login;
