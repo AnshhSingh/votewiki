@@ -1,67 +1,61 @@
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import React from 'react';
 
-export default function Component() {
-  return (
-    <div
-      key="1"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-l from-[#0645ad] via-[#f8f9fa] to-[#0645ad] py-12 px-4 sm:px-6 lg:px-8 font-libertine"
-    >
-      <div className="max-w-md w-full space-y-8 bg-[#f8f9fa] p-6 rounded-lg shadow-md">
-        <div>
-          <img
-            alt="Wikipedia Logo"
-            className="mx-auto h-12 w-auto"
-            height="72"
-            src="/placeholder.svg"
-            style={{
-              aspectRatio: "72/72",
-              objectFit: "cover",
-            }}
-            width="72"
-          />
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-black">Sign in to your account</h2>
+export default function Login() {
+    return (
+        <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+            <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring ring-2 ring-purple-600 lg:max-w-xl">
+                <h1 className="text-3xl font-semibold text-center text-purple-700 underline uppercase decoration-wavy">
+                   Sign in
+                </h1>
+                <form className="mt-6">
+                    <div className="mb-2">
+                        <label
+                            for="email"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                    </div>
+                    <div className="mb-2">
+                        <label
+                            for="password"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                    </div>
+                    <a
+                        href="/forgot-password"
+                        className="text-xs text-purple-600 hover:underline"
+                    >
+                        Forget Password?
+                    </a>
+                    <div className="mt-6">
+                        <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                            Login
+                        </button>
+                    </div>
+                </form>
+
+                <p className="mt-8 text-xs font-light text-center text-gray-700">
+                    {" "}
+                    Don't have an account?{" "}
+                    <a
+                        href="/create-user"
+                        className="font-medium text-purple-600 hover:underline"
+                    >
+                        Sign up
+                    </a>
+                </p>
+            </div>
         </div>
-        <form className="mt-8 space-y-6">
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <Label className="sr-only" htmlFor="username">
-                Username
-              </Label>
-              <Input
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black rounded-t-md focus:outline-none focus:ring-[#0645ad] focus:border-[#0645ad] focus:z-10 sm:text-sm"
-                id="username"
-                name="username"
-                placeholder="Username"
-                required
-                type="text"
-              />
-            </div>
-            <div>
-              <Label className="sr-only" htmlFor="password">
-                Password
-              </Label>
-              <Input
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black rounded-b-md focus:outline-none focus:ring-[#0645ad] focus:border-[#0645ad] focus:z-10 sm:text-sm"
-                id="password"
-                name="password"
-                placeholder="Password"
-                required
-                type="password"
-              />
-            </div>
-          </div>
-          <div>
-            <Button
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#0645ad] hover:bg-[#0645ad] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0645ad]"
-              type="submit"
-            >
-              Sign in
-            </Button>
-          </div>
-        </form>
-      </div>
-    </div>
-  )
+    );
 }
