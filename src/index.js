@@ -1,19 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import Main from './pages/main';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import { MetaMaskProvider } from '@metamask/sdk-react';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import Main from "./pages/main";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { MetaMaskProvider } from "@metamask/sdk-react";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Main />
-    </MetaMaskProvider>
+    <BrowserRouter>
+      <MetaMaskProvider
+        debug={false}
+        sdkOptions={{
+          dappMetadata: {
+            name: "Example React Dapp",
+            url: window.location.href,
+          },
+          // Other options
+        }}
+      >
+        <Main />
+      </MetaMaskProvider>
     </BrowserRouter>
-    
-    </React.StrictMode>
   </React.StrictMode>
 );
 
