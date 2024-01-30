@@ -1,8 +1,46 @@
-import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
 import "./signuppage.css";
-
+import {useState} from 'react';
+import Web3 from 'web3';
 const SignUpPage = () => {
+
+  const [isConnected, setIsConnected] = useState(false);
+  // const [ethBalance, setEthBalance] = useState("");
+  
+  const detectCurrentProvider = () => {
+    let provider;
+    if (window.ethereum) {
+      provider = window.ethereum;
+    } else if (window.web3) {
+      provider = window.web3.currentProvider;
+    } else {
+      console.log("Non-ethereum browser detected. You should install Metamask");
+    }
+    return provider;
+  };
+  
+  const onConnect = async() => {
+    try {
+      const currentProvider = detectCurrentProvider();
+      if(currentProvider) {
+        await currentProvider.request({method: 'eth_requestAccounts'});
+        const web3 = new Web3(currentProvider);
+        const userAccount  =await web3.eth.getAccounts();
+        const account = userAccount[0];
+        let ethBalance = await web3.eth.getBalance(account);
+        // setEthBalance(ethBalance);
+        setIsConnected(true);
+      }
+    } catch(err) {
+      console.log(err);
+    }
+  }
+  
+  const onDisconnect = () => {
+    setIsConnected(false);
+  }
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -47,7 +85,11 @@ const SignUpPage = () => {
         {password !== confirmPassword && (
           <p className="error-message">Passwords do not match</p>
         )}
-        <button onClick="/signup">Sign Up</button>
+        
+        <button className="app-button__login" onClick={onConnect}>
+        Sign Up
+            </button>
+            {isConnected}
         <p className="login-link">
           Already have an account? <Link to="/signup">Log in</Link>
         </p>
