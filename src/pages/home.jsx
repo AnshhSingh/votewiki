@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link }  from "react-router-dom";
+// import { Link }  from "react-router-dom";
 
 export default function Component() {
   return (
@@ -32,7 +32,7 @@ export default function Component() {
                 />
               </svg>
             </button>
-            <div className="absolute right-0 mt-2 w-48 bg-[#0645ad] rounded-md overflow-hidden shadow-xl z-10 hidden group-hover:block">
+            {/* <div className="absolute right-0 mt-2 w-48 bg-[#0645ad] rounded-md overflow-hidden shadow-xl z-10 hidden group-hover:block">
               <a className="block px-4 py-2 text-sm text-white hover:bg-[#0b0080]" href="#">
                 Option 1
               </a>
@@ -41,8 +41,8 @@ export default function Component() {
               </a>
               <a className="block px-4 py-2 text-sm text-white hover:bg-[#0b0080]" href="#">
                 Option 3
-              </a>
-            </div>
+              </a> */}
+            {/* </div> */}
           </div>
           <div className="text-white font-bold">Balance: $1000</div>
         </div>
