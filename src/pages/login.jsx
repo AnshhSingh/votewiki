@@ -104,7 +104,7 @@ function Login() {
                     {" "}
                     Don't have an account?{" "}
                     <a
-                        href="/create-user"
+                        href="/create"
                         className="font-medium text-purple-600 hover:underline"
                     >
                         Sign up
