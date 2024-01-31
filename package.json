@@ -15,8 +15,12 @@
     "express": "^4.18.2",
     "gun": "^0.2020.1239",
     "lucide-react": "^0.317.0",
+<<<<<<< HEAD
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
+=======
+    "openai": "^4.26.0",
+>>>>>>> 1dfb11c99eb1c1f7f6b3c9e5a400150762688fdd
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.21.3",

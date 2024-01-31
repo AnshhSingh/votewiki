@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import Web3 from 'web3';
 
 function Login() {
@@ -63,7 +63,7 @@ function Login() {
                     </div>
                     <div className="mb-2">
                         <label
-                            htmlfor="password"
+                            htmlFor="password"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Password
