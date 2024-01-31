@@ -1,7 +1,39 @@
 import * as React from "react";
 // import { Link }  from "react-router-dom";
+import OpenAI from "openai";
+const openai = new OpenAI();
 
 export default function Component() {
+  
+  function DataFetcher() {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const data = await fetchData('https://api.example.com/data');
+          setData(data);
+          setLoading(false);
+        } catch (error) {
+          setError(error);
+          setLoading(false);
+        }
+      }
+  
+      fetchData();
+    }, []);
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
+
+
   return (
     <div className="flex flex-col w-full">
       <nav className="flex items-center justify-between p-6 bg-[#0645ad] text-white shadow-md">

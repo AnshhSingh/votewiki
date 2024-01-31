@@ -6,7 +6,7 @@ import Web3 from 'web3';
 const SignUpPage = () => {
 
   const [isConnected, setIsConnected] = useState(false);
-  // const [ethBalance, setEthBalance] = useState("");
+  const [ethBalance, setEthBalance] = useState("");
   
   const detectCurrentProvider = () => {
     let provider;
@@ -29,8 +29,10 @@ const SignUpPage = () => {
         const userAccount  =await web3.eth.getAccounts();
         const account = userAccount[0];
         let ethBalance = await web3.eth.getBalance(account);
-        // setEthBalance(ethBalance);
+        setEthBalance(ethBalance);
         setIsConnected(true);
+        // console.log(ethBalance);
+        alert("Your metamask account is already linked");
       }
     } catch(err) {
       console.log(err);
