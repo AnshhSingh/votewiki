@@ -20,29 +20,20 @@ const SignUpPage = () => {
     return provider;
   };
   
-  const onConnect = async() => {
-    try {
-      const currentProvider = detectCurrentProvider();
-      if(currentProvider) {
-        await currentProvider.request({method: 'eth_requestAccounts'});
-        const web3 = new Web3(currentProvider);
-        const userAccount  =await web3.eth.getAccounts();
-        const account = userAccount[0];
-        let ethBalance = await web3.eth.getBalance(account);
-        setEthBalance(ethBalance);
-        setIsConnected(true);
-        // console.log(ethBalance);
-        alert("Your metamask account is already linked");
-      }
-    } catch(err) {
-      console.log(err);
-    }
+  const onConnect = async function getAccount() {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+      .catch((err) => {
+        if (err.code === 4001) {
+          // EIP-1193 userRejectedRequest error
+          // If this happens, the user rejected the connection request.
+          console.log('Please connect to MetaMask.');
+        } else {
+          console.error(err);
+        }
+      });
+    const account = accounts[0];
+  console.log(account);
   }
-  
-  const onDisconnect = () => {
-    setIsConnected(false);
-  }
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -61,9 +52,7 @@ const SignUpPage = () => {
 
   return (
     <div>
-      <div>
-        <image src="logomain" alt="logo" />
-      </div>
+    
       <div className="login-container">
         <h1>Sign Up</h1>
         <input
