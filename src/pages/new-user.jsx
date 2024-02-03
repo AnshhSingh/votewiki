@@ -1,13 +1,11 @@
-
 import { Link } from "react-router-dom";
 import "./signuppage.css";
-import {useState} from 'react';
-import Web3 from 'web3';
+import { useState } from "react";
+import Web3 from "web3";
 const SignUpPage = () => {
-
   const [isConnected, setIsConnected] = useState(false);
   const [ethBalance, setEthBalance] = useState("");
-  
+
   const detectCurrentProvider = () => {
     let provider;
     if (window.ethereum) {
@@ -19,21 +17,22 @@ const SignUpPage = () => {
     }
     return provider;
   };
-  
+
   const onConnect = async function getAccount() {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    const accounts = await window.ethereum
+      .request({ method: "eth_requestAccounts" })
       .catch((err) => {
         if (err.code === 4001) {
           // EIP-1193 userRejectedRequest error
           // If this happens, the user rejected the connection request.
-          console.log('Please connect to MetaMask.');
+          console.log("Please connect to MetaMask.");
         } else {
           console.error(err);
         }
       });
     const account = accounts[0];
-  console.log(account);
-  }
+    console.log(account);
+  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -52,7 +51,6 @@ const SignUpPage = () => {
 
   return (
     <div>
-    
       <div className="login-container">
         <h1>Sign Up</h1>
         <input
@@ -76,11 +74,11 @@ const SignUpPage = () => {
         {password !== confirmPassword && (
           <p className="error-message">Passwords do not match</p>
         )}
-        
+
         <button className="app-button__login" onClick={onConnect}>
-        Sign Up
-            </button>
-            {isConnected}
+          Sign Up
+        </button>
+        {isConnected}
         <p className="login-link">
           Already have an account? <Link to="/login">Log in</Link>
         </p>

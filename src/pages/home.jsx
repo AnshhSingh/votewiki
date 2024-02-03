@@ -43,14 +43,10 @@ export default function Component() {
     }
 
     fetchData();
-  }
-  );
-// import { Link }  from "react-router-dom";
-// import OpenAI from "openai";
+  });
+  // import { Link }  from "react-router-dom";
+  // import OpenAI from "openai";
 
-
-  
-  
   return (
     <div className="flex flex-col w-full">
       <nav className="flex items-center justify-between p-6 bg-[#0645ad] text-white shadow-md">
@@ -105,7 +101,7 @@ export default function Component() {
           <div className="flex flex-col items-center space-y-4 text-center">
             <div className="space-y-2">
               <h1 className=" m-3 text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-[#0645ad]">
-              {data[`text${currentIndex}`].title}
+                {data[`text${currentIndex}`].title}
               </h1>
               <p className=" m-8 mx-auto max-w-[700px] text-[#a2a9b1]  text-2xl md:text-3xl dark:text-gray-400">
                 the factual findings of data found online will be displayed here
@@ -119,19 +115,17 @@ export default function Component() {
                   Orignal
                 </h2>
                 <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                {data[`text${currentIndex}`].original}
-                  
+                  {data[`text${currentIndex}`].original}
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <button
-                onClick={handleButtonClick}
+                  onClick={handleButtonClick}
                   className="inline-flex h-10 items-center justify-center rounded-md bg-[#0b0080] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0645ad] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0645ad] disabled:pointer-events-none disabled:opacity-50"
                   href=""
                 >
                   Dont Change
                 </button>
-               
               </div>
             </div>
             <div className="flex flex-col justify-center space-y-4 bg-white p-4 rounded-lg border-2 border-[#a2a9b1]">
@@ -141,14 +135,12 @@ export default function Component() {
                 </h2>
 
                 <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  
-                   {data[`text${currentIndex}`].rev}
-                   
+                  {data[`text${currentIndex}`].rev}
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <button
-                onClick={handleButtonClick}
+                  onClick={handleButtonClick}
                   className="inline-flex h-10 items-center justify-center rounded-md bg-[#0b0080] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0645ad] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0645ad] disabled:pointer-events-none disabled:opacity-50"
                   href="#top"
                 >

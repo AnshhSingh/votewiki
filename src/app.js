@@ -1,11 +1,10 @@
-import {useState, useEffect} from 'react';
-import Web3 from 'web3';
+import { useState, useEffect } from "react";
+import Web3 from "web3";
 
 function App() {
-  
   const [isConnected, setIsConnected] = useState(false);
   const [ethBalance, setEthBalance] = useState("");
-  
+
   const detectCurrentProvider = () => {
     let provider;
     if (window.ethereum) {
@@ -17,30 +16,28 @@ function App() {
     }
     return provider;
   };
-  
-  const onConnect = async() => {
+
+  const onConnect = async () => {
     try {
       const currentProvider = detectCurrentProvider();
-      if(currentProvider) {
-        await currentProvider.request({method: 'eth_requestAccounts'});
+      if (currentProvider) {
+        await currentProvider.request({ method: "eth_requestAccounts" });
         const web3 = new Web3(currentProvider);
-        const userAccount  =await web3.eth.getAccounts();
+        const userAccount = await web3.eth.getAccounts();
         const account = userAccount[0];
         let ethBalance = await web3.eth.getBalance(account);
         setEthBalance(ethBalance);
         setIsConnected(true);
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
-  
+  };
+
   const onDisconnect = () => {
     setIsConnected(false);
-  }
-  
-  
-  
+  };
+
   return (
     <div className="app">
       <div className="app-header">
@@ -50,7 +47,7 @@ function App() {
         {!isConnected && (
           <div>
             <button className="app-button__login" onClick={onConnect}>
-            Login
+              Login
             </button>
           </div>
         )}
@@ -66,7 +63,7 @@ function App() {
           </div>
           <div>
             <button className="app-buttons__logout" onClick={onDisconnect}>
-            Disconnect
+              Disconnect
             </button>
           </div>
         </div>
